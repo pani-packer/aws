@@ -1,0 +1,19 @@
+---
+# playbook.yml
+- name: 'Provision Image'
+  hosts: default
+  become: true
+
+  tasks:
+    - name: install Apache
+      package:
+        name: 'httpd'
+        state: present
+    - name: Enable service httpd, and not touch the state
+      service:
+        name: httpd
+        enabled: yes
+    - name: Health check
+      shell: echo 'hello v2' > /var/www/html/index.html
+
+  

@@ -1,0 +1,22 @@
+{
+    "variables": {
+    "shared_credentials_file": "{{env `AWS_CRED`}}"
+  },
+    "builders": [
+      {
+        "type": "amazon-ebs",
+        "shared_credentials_file": "{{user `shared_credentials_file`}}",
+        "region": "us-east-1",
+        "source_ami": "ami-048f6ed62451373d9",
+        "instance_type": "t2.micro",
+        "ssh_username": "ec2-user",
+        "ami_name": "packer_aws_rhel_golden_ami_v2"
+      }
+    ],
+    "provisioners": [
+        {
+          "type": "ansible",
+          "playbook_file": "./playbook.yml"
+        }
+    ]
+  }
