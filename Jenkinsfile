@@ -10,7 +10,6 @@ pipeline {
         stage('Validate') {
             steps {
                 sh '''
-                mkdir .venv
                 virtualenv .venv
                 . .venv/bin/activate
                 pip install --upgrade -r requirements.txt
