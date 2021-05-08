@@ -12,7 +12,6 @@ pipeline {
                 sh '''
                 virtualenv .venv
                 . .venv/bin/activate
-                cat /home/pani/.aws/credentials
                 pip install --upgrade -r requirements.txt
                 packer validate aws_ec2.json
                 '''
@@ -23,6 +22,7 @@ pipeline {
                 sh '''
                 virtualenv .venv
                 . .venv/bin/activate
+                export AWS_CRED=/home/pani/.aws/credentials
                 pip install --upgrade -r requirements.txt
                 packer build aws_ec2.json
                 '''
