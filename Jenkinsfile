@@ -10,6 +10,10 @@ pipeline {
         stage('Validate') {
             steps {
                 sh '''
+                mkdir .venv
+                virtualenv .venv
+                . .venv/bin/activate
+                pip install --upgrade -r requirements.txt
                 packer validate aws_ec2.json
                 '''
             }
