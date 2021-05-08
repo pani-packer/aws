@@ -20,6 +20,9 @@ pipeline {
         stage('Build') {
             steps {
                 sh '''
+                virtualenv .venv
+                . .venv/bin/activate
+                pip install --upgrade -r requirements.txt
                 packer build aws_ec2.json
                 '''
             }
