@@ -7,10 +7,17 @@ pipeline {
                 checkout([$class: 'GitSCM', branches: [[name: '*/main']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/pani-packer/aws']]])
             }
         }
+        stage('Validate') {
+            steps {
+                sh '''
+                packer validate aws_ec2.json
+                '''
+            }
+        }
         stage('Build') {
             steps {
                 sh '''
-                echo build
+                packer build aws_ec2.json
                 '''
             }
         }
